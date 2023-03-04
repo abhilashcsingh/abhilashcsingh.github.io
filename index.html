@@ -8,9 +8,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <link rel="stylesheet" type="text/css" href="stylesheet.css">
-  <link rel="icon" type="image/png" href="images/IC.png">  
+  <link rel="icon" type="image/png" href="images/IC.png"> 
+  <script async src="https://api.countapi.xyz/hit/abhilashcsingh.github.io/visits?  callback=apoorva"></script>
 </head>
 
+function apoorva(response) {
+    document.getElementById('visits').innerText = response.value;
+}
+	
 <body>
   
 	
@@ -690,8 +695,8 @@
             <td style="padding:0px">
               <br>
               <p style="text-align:center;font-size:small;">
-                <br>
-                Last updated January 28, 2023.
+                <br> Last updated March 03, 2023.
+		<br> <h1>This page has received <span id="visits"></span> views.</h1>
               </p>
             </td>
           </tr>
