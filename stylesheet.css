@@ -82,22 +82,22 @@ tr,
 p,
 a {
   font-family: 'Lato', Verdana, Helvetica, sans-serif;
-  font-size: 18px
+  font-size: 16px
 }
 
 strong {
   font-family: 'Lato', Verdana, Helvetica, sans-serif;
-  font-size: 14px;
+  font-size: 16px;
 }
 
 heading {
   font-family: 'Lato', Verdana, Helvetica, sans-serif;
-  font-size: 22px;
+  font-size: 20px;
 }
 
 papertitle {
   font-family: 'Lato', Verdana, Helvetica, sans-serif;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 700
 }
 
@@ -155,7 +155,7 @@ span.highlight {
 /* The dropdown container */
 .dropdown {
   float: left;
-  font-size: 16px;
+  font-size: 14px;
   color: black;
   text-align: center;
   padding: 14px 16px;
@@ -165,7 +165,7 @@ span.highlight {
 
 /* Dropdown button */
 .dropdown .dropbtn {
-  font-size: 16px;
+  font-size: 14px;
   border: none;
   outline: none;
   color: black;
