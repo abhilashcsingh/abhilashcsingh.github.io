@@ -180,6 +180,13 @@ span.highlight {
   background-color: red;
 }
 
+/* Center the navbar */
+.navbar {
+  display: flex;
+  justify-content: center;
+}
+
+
 /* Dropdown content (hidden by default) */
 .dropdown-content {
   display: none;
