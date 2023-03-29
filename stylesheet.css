@@ -241,8 +241,3 @@ span.highlight {
   clear: both;
 } 
 
-/* Reduce space after sections (tables) */
-table {
-  margin-bottom: 5px;
-}
-
