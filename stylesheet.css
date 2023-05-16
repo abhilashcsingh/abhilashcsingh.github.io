@@ -177,7 +177,7 @@ span.highlight {
 
 /* Add a blue background color to navbar links on hover */
 .navbar a:hover, .dropdown:hover .dropbtn {
-  background-color: blue;
+  background-color: azure;
 }
 
 /* Center the navbar */
@@ -200,7 +200,7 @@ span.highlight {
 
 /* Mega Menu header, if needed */
 .dropdown-content .header {
-  background: blue;
+  background: azure;
   padding: 16px;
   color: white;
 }
