@@ -335,13 +335,13 @@
         <ul class="positions">
           <li>
             <span class="pos-year">2027 →</span>
-            <span><strong>Lecturer, Transport &amp; Energy Systems</strong><br>
+            <span><strong>Lecturer in Transport &amp; Energy Systems</strong><br>
             <em>Loughborough University</em>, School of Architecture, Building and Civil Engineering</span>
           </li>
           <li>
             <span class="pos-year">2024 – 2026</span>
             <span><strong>Co-PI &amp; Research Fellow</strong><br>
-            <em>Trinity College Dublin</em>, Dept. of Civil, Structural &amp; Environmental Engineering</span>
+            <em>Trinity College Dublin</em>, advised by <a href="https://www.tcd.ie/research/profiles/?profile=caulfib" style="color:var(--accent);">Prof. Brian Caulfield</a></span>
           </li>
           <li>
             <span class="pos-year">2019 – 2023</span>
@@ -474,10 +474,16 @@
   </div>
 
   <footer>
-    <div class="container">
-      Last updated 15 March 2026
+  <div class="container">
+    Last updated <span id="last-updated"></span>
     </div>
   </footer>
+  <script>
+    document.getElementById('last-updated').textContent =
+      new Date(document.lastModified).toLocaleDateString('en-GB', {
+        day: 'numeric', month: 'long', year: 'numeric'
+      });
+  </script>
 
 </body>
 </html>
