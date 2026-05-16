@@ -1,38 +1,336 @@
 <!DOCTYPE HTML>
 <html lang="en">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>Abhilash Chandra Singh</title>
-  <meta name="author" content="Abhilash Chandra Singh">
+  <meta charset="UTF-8">
+  <meta name="author" content="Abhilash Chandra Singh, Ph.D.">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" type="text/css" href="stylesheet.css">
-</head>	
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+  <title>Blog — Abhilash Chandra Singh</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream: #f7f3ee;
+      --ink: #1c1a17;
+      --ink-light: #4a4540;
+      --ink-muted: #7a746c;
+      --accent: #8b5e3c;
+      --rule: #ddd6cc;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--cream);
+      color: var(--ink);
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      font-size: 16px;
+      line-height: 1.75;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      height: 60px;
+      background: var(--cream);
+      border-bottom: 1px solid var(--rule);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 2.5rem;
+    }
+
+    nav a {
+      font-family: 'Jost', sans-serif;
+      font-weight: 400;
+      font-size: 13px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+      text-decoration: none;
+      transition: color 0.2s;
+      position: relative;
+    }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      left: 0; bottom: -3px;
+      width: 0; height: 1px;
+      background: var(--accent);
+      transition: width 0.25s ease;
+    }
+
+    nav a:hover { color: var(--accent); }
+    nav a:hover::after { width: 100%; }
+    nav a.active { color: var(--accent); }
+    nav a.active::after { width: 100%; }
+
+    /* ── LAYOUT ── */
+    .container {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    /* ── PAGE HEADER ── */
+    .page-header {
+      padding: 5rem 0 3rem;
+      border-bottom: 1px solid var(--rule);
+      animation: fadeUp 0.5s ease both;
+    }
+
+    h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 500;
+      font-size: clamp(2.2rem, 5vw, 3.2rem);
+      line-height: 1.15;
+      letter-spacing: -0.01em;
+      color: var(--ink);
+      margin-bottom: 0.5rem;
+    }
+
+    .page-sub {
+      font-size: 13px;
+      font-weight: 400;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+
+    /* ── POSTS LIST ── */
+    .posts {
+      padding: 1rem 0 4rem;
+      animation: fadeUp 0.5s ease 0.05s both;
+    }
+
+    .post-item {
+      display: grid;
+      grid-template-columns: 110px 1fr;
+      gap: 0 1.5rem;
+      padding: 1.4rem 0;
+      border-bottom: 1px solid var(--rule);
+      align-items: start;
+    }
+
+    .post-item:first-child {
+      border-top: 1px solid var(--rule);
+    }
+
+    .post-meta {
+      padding-top: 0.2em;
+    }
+
+    .post-date {
+      font-size: 12px;
+      font-weight: 400;
+      letter-spacing: 0.04em;
+      color: var(--ink-muted);
+      display: block;
+      margin-bottom: 0.4rem;
+    }
+
+    /* ── TAGS ── */
+    .tag {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 2px 7px;
+      border-radius: 2px;
+    }
+
+    .tag-personal  { background: rgba(139,94,60,0.12);  color: var(--accent); }
+    .tag-transport { background: rgba(60,100,139,0.10);  color: #3c648b; }
+    .tag-academic  { background: rgba(60,120,80,0.10);   color: #3a7050; }
+    .tag-link      { background: rgba(100,60,130,0.10);  color: #6a3c82; }
+
+    /* ── POST BODY ── */
+    .post-body {
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+    }
+
+    .post-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 500;
+      font-size: 1.2rem;
+      line-height: 1.3;
+      color: var(--ink);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .post-title:hover { color: var(--accent); }
+
+    .post-desc {
+      font-size: 13.5px;
+      color: var(--ink-muted);
+      line-height: 1.55;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 2.5rem 0;
+      text-align: center;
+      font-size: 12px;
+      letter-spacing: 0.06em;
+      color: var(--ink-muted);
+      border-top: 1px solid var(--rule);
+    }
+
+    /* ── ANIMATE ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 560px) {
+      .post-item {
+        grid-template-columns: 1fr;
+        gap: 0.4rem;
+      }
+      .post-meta { display: flex; align-items: center; gap: 0.6rem; }
+    }
+  </style>
+</head>
 <body>
-  <div class="navbar">
+
+  <nav>
     <a href="https://abhilashcsingh.github.io/">Home</a>
     <a href="https://abhilashcsingh.github.io/research.html">Research</a>
     <a href="https://abhilashcsingh.github.io/news.html">News</a>
-    <a href="https://abhilashcsingh.github.io/blog.html">Blog</a>
+    <a href="https://abhilashcsingh.github.io/blog.html" class="active">Blog</a>
+  </nav>
+
+  <div class="container">
+
+    <div class="page-header">
+      <h1>Blog</h1>
+      <p class="page-sub">General musings &amp; writing</p>
+    </div>
+
+    <div class="posts">
+
+      <div class="post-item">
+        <div class="post-meta">
+          <span class="post-date">13 Sep 2024</span>
+          <span class="tag tag-personal">Personal</span>
+        </div>
+        <div class="post-body">
+          <a class="post-title" href="data/Blog_An_Ode_to_My_Grandfather.pdf">An Ode to my Grandfather</a>
+        </div>
+      </div>
+
+      <div class="post-item">
+        <div class="post-meta">
+          <span class="post-date">13 Sep 2024</span>
+          <span class="tag tag-personal">Personal</span>
+        </div>
+        <div class="post-body">
+          <a class="post-title" href="data/Blog_Finding My Own Way - A Journey of Introspection and Self-Reliance.pdf">Finding My Own Way — A Journey of Introspection and Self-Reliance</a>
+        </div>
+      </div>
+
+      <div class="post-item">
+        <div class="post-meta">
+          <span class="post-date">3 Sep 2024</span>
+          <span class="tag tag-transport">Transport</span>
+        </div>
+        <div class="post-body">
+          <a class="post-title" href="data/Blog_The Green Mirage- Swapping Cars, Not Solutions.pdf">The Green Mirage — Swapping Cars, Not Solutions</a>
+          <span class="post-desc">On why electrifying private cars sidesteps the harder questions about car dependency.</span>
+        </div>
+      </div>
+
+      <div class="post-item">
+        <div class="post-meta">
+          <span class="post-date">3 Aug 2024</span>
+          <span class="tag tag-academic">Academic</span>
+        </div>
+        <div class="post-body">
+          <a class="post-title" href="data/Blog_Econometric_Reading_List_for_Choice_Modellers.pdf">Recommended Econometrics Books for Choice Modelling and Statistical Analysis of Travel Behaviour</a>
+          <span class="post-desc">A curated reading list for researchers working in discrete choice and travel behaviour.</span>
+        </div>
+      </div>
+
+      <div class="post-item">
+        <div class="post-meta">
+          <span class="post-date">14 Apr 2024</span>
+          <span class="tag tag-personal">Personal</span>
+        </div>
+        <div class="post-body">
+          <a class="post-title" href="data/Blog_A_Life_Worth_Living.pdf">Reflecting on some experiences of my life</a>
+        </div>
+      </div>
+
+      <div class="post-item">
+        <div class="post-meta">
+          <span class="post-date">24 Feb 2024</span>
+          <span class="tag tag-personal">Personal</span>
+        </div>
+        <div class="post-body">
+          <a class="post-title" href="data/Blog_Review_of_Miller's_Girl_and_the_teacher_student_power_dynamics.pdf">Review of <em>Miller's Girl</em> and the Teacher–Student Power Dynamic</a>
+        </div>
+      </div>
+
+      <div class="post-item">
+        <div class="post-meta">
+          <span class="post-date">22 May 2023</span>
+          <span class="tag tag-link">External</span>
+        </div>
+        <div class="post-body">
+          <a class="post-title" href="https://www.newyorker.com/magazine/2023/05/22/carmageddon-daniel-knowles-book-review-paved-paradise-henry-grabar?utm_source=pocket-newtab-global-en-GB" target="_blank">What I'm reading: How to quit cars? ↗</a>
+          <span class="post-desc">A <em>New Yorker</em> review of <em>Carmageddon</em> and <em>Paved Paradise</em> — two books on America's car problem.</span>
+        </div>
+      </div>
+
+      <div class="post-item">
+        <div class="post-meta">
+          <span class="post-date">1 Jan 2023</span>
+          <span class="tag tag-transport">Transport</span>
+        </div>
+        <div class="post-body">
+          <a class="post-title" href="data/Blog_Accessibility_Matters.pdf">Accessibility Matters! A Case Study of London</a>
+          <span class="post-desc">Examining how accessibility measures can incorporate air pollution and crime exposure in urban planning.</span>
+        </div>
+      </div>
+
+      <div class="post-item">
+        <div class="post-meta">
+          <span class="post-date">1 Nov 2022</span>
+          <span class="tag tag-academic">Academic</span>
+        </div>
+        <div class="post-body">
+          <a class="post-title" href="data/Blog_Recent_advances_in_transportation_research.pdf">Recent Advances in Transportation Research</a>
+          <span class="post-desc">A roundup of notable developments in the field — modelling, behaviour, and systems thinking.</span>
+        </div>
+      </div>
+
+    </div>
   </div>
-  
-  <table style="width:100%;max-width:1100px;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
-    <tbody>
-      <tr>
-        <td>
-          <h1>Blog and general musings</h1>
-          <p>[13/09/2024] <a href="data/Blog_An_Ode_to_My_Grandfather.pdf">An Ode to my Grand Father</a></p>
-          <p>[13/09/2024] <a href="data/Blog_Finding My Own Way - A Journey of Introspection and Self-Reliance.pdf">Finding My Own Way - A Journey of Introspection and Self-Reliance</a></p>
-          <p>[03/09/2024] <a href="data/Blog_The Green Mirage- Swapping Cars, Not Solutions.pdf">The Green Mirage- Swapping Cars, Not Solutions</a></p>
-          <p>[03/08/2024] <a href="data/Blog_Econometric_Reading_List_for_Choice_Modellers.pdf">Recommended Econometrics Books for Choice Modelling and Statistical Analysis of Travel Behaviour</a></p>
-          <p>[14/04/2024] <a href="data/Blog_A_Life_Worth_Living.pdf">Reflecting on some experiences of my life</a></p>
-          <p>[24/02/2024] <a href="data/Blog_Review_of_Miller's_Girl_and_the_teacher_student_power_dynamics.pdf">Review of Miller's Girl and the teacher-student power dynamics</a></p>
-          <p>[22/05/2023] What I am reading: <a href="https://www.newyorker.com/magazine/2023/05/22/carmageddon-daniel-knowles-book-review-paved-paradise-henry-grabar?utm_source=pocket-newtab-global-en-GB">How to quit cars?</a></p>
-          <p>[01/01/2023] <a href="data/Blog_Accessibility_Matters.pdf">Accessibility Matters! A Case Study of London</a></p>
-          <p>[01/11/2022] <a href="data/Blog_Recent_advances_in_transportation_research.pdf">Recent advances in transportation research</a></p>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+
+  <footer>
+    <div class="container">
+      Last updated <span id="last-updated"></span>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('last-updated').textContent =
+      new Date(document.lastModified).toLocaleDateString('en-GB', {
+        day: 'numeric', month: 'long', year: 'numeric'
+      });
+  </script>
+
 </body>
 </html>
-
