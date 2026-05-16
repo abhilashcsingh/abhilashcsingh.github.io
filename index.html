@@ -1,205 +1,483 @@
 <!DOCTYPE HTML>
 <html lang="en">
 <head>
-	  <style>
-	    .section {
-	      margin-bottom: 10px; /* Adjust this value to your desired spacing */
-	    }
-	  </style>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta name="author" content="Abhilash Chandra Singh, Ph.D.">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" type="text/css" href="stylesheet.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
   <title>Abhilash Chandra Singh</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream: #f7f3ee;
+      --ink: #1c1a17;
+      --ink-light: #4a4540;
+      --ink-muted: #7a746c;
+      --accent: #8b5e3c;
+      --accent-light: #c49a78;
+      --rule: #ddd6cc;
+      --nav-h: 60px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--cream);
+      color: var(--ink);
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      font-size: 16px;
+      line-height: 1.75;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      height: var(--nav-h);
+      background: var(--cream);
+      border-bottom: 1px solid var(--rule);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 2.5rem;
+    }
+
+    nav a {
+      font-family: 'Jost', sans-serif;
+      font-weight: 400;
+      font-size: 13px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+      text-decoration: none;
+      transition: color 0.2s;
+      position: relative;
+    }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      left: 0; bottom: -3px;
+      width: 0; height: 1px;
+      background: var(--accent);
+      transition: width 0.25s ease;
+    }
+
+    nav a:hover { color: var(--accent); }
+    nav a:hover::after { width: 100%; }
+
+    /* ── LAYOUT ── */
+    .container {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      padding: 5rem 0 4rem;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 3rem;
+      align-items: start;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .hero-text { }
+
+    h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 500;
+      font-size: clamp(2.2rem, 5vw, 3.2rem);
+      line-height: 1.15;
+      letter-spacing: -0.01em;
+      color: var(--ink);
+      margin-bottom: 0.25rem;
+    }
+
+    .hero-title {
+      font-size: 13px;
+      font-weight: 400;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 2rem;
+    }
+
+    .positions { list-style: none; }
+
+    .positions li {
+      display: flex;
+      gap: 1rem;
+      padding: 0.65rem 0;
+      border-bottom: 1px solid var(--rule);
+      font-size: 14.5px;
+      line-height: 1.55;
+      align-items: baseline;
+    }
+
+    .positions li:first-child { border-top: 1px solid var(--rule); }
+
+    .pos-year {
+      flex-shrink: 0;
+      width: 110px;
+      font-size: 12px;
+      letter-spacing: 0.05em;
+      color: var(--ink-muted);
+      padding-top: 0.05em;
+    }
+
+    .positions li strong { font-weight: 500; }
+    .positions li em { color: var(--accent); font-style: normal; font-weight: 400; }
+
+    .hero-photo {
+      width: 200px;
+      flex-shrink: 0;
+    }
+
+    .hero-photo img {
+      width: 100%;
+      aspect-ratio: 4/5;
+      object-fit: cover;
+      display: block;
+      filter: grayscale(15%);
+      transition: filter 0.3s;
+    }
+
+    .hero-photo img:hover { filter: grayscale(0%); }
+
+    /* ── SECTIONS ── */
+    section {
+      padding: 3.5rem 0;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    section:last-of-type { border-bottom: none; }
+
+    h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 500;
+      font-size: 1.65rem;
+      letter-spacing: -0.01em;
+      color: var(--ink);
+      margin-bottom: 1.5rem;
+    }
+
+    h2 span {
+      display: inline-block;
+      width: 28px;
+      height: 1.5px;
+      background: var(--accent);
+      vertical-align: middle;
+      margin-right: 0.75rem;
+      margin-bottom: 3px;
+    }
+
+    /* ── ABOUT ── */
+    .about-body p {
+      font-size: 15.5px;
+      color: var(--ink-light);
+      margin-bottom: 1rem;
+    }
+
+    .about-body p:last-child { margin-bottom: 0; }
+
+    .about-body a {
+      color: var(--accent);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    .funding-highlight {
+      margin: 1.5rem 0;
+      padding: 1rem 1.25rem;
+      border-left: 2px solid var(--accent);
+      background: rgba(139, 94, 60, 0.05);
+    }
+
+    .funding-highlight p {
+      font-size: 14px;
+      color: var(--ink-light);
+      margin: 0;
+    }
+
+    .funding-highlight strong { font-weight: 500; color: var(--ink); }
+
+    /* ── CONTACT LINKS ── */
+    .links-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 0.6rem;
+    }
+
+    .link-item {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.7rem 1rem;
+      border: 1px solid var(--rule);
+      text-decoration: none;
+      color: var(--ink-light);
+      font-size: 14px;
+      font-weight: 400;
+      transition: border-color 0.2s, color 0.2s, background 0.2s;
+      background: transparent;
+    }
+
+    .link-item:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: rgba(139, 94, 60, 0.04);
+    }
+
+    .link-icon {
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+      opacity: 0.6;
+    }
+
+    .link-note {
+      padding: 0.7rem 1rem;
+      border: 1px dashed var(--rule);
+      font-size: 14px;
+      color: var(--ink-muted);
+      font-style: italic;
+    }
+
+    /* ── REFERENCES ── */
+    .refs-list { list-style: none; }
+
+    .refs-list li {
+      padding: 0.9rem 0;
+      border-bottom: 1px solid var(--rule);
+      font-size: 14.5px;
+      color: var(--ink-light);
+    }
+
+    .refs-list li:last-child { border-bottom: none; }
+
+    .refs-list a {
+      font-weight: 500;
+      color: var(--ink);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .refs-list a:hover { color: var(--accent); }
+
+    .refs-list .ref-role {
+      font-size: 12.5px;
+      color: var(--ink-muted);
+      margin-top: 0.1rem;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 2rem 0;
+      text-align: center;
+      font-size: 12px;
+      letter-spacing: 0.06em;
+      color: var(--ink-muted);
+    }
+
+    /* ── ANIMATE IN ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero, section {
+      animation: fadeUp 0.55s ease both;
+    }
+
+    section:nth-of-type(1) { animation-delay: 0.05s; }
+    section:nth-of-type(2) { animation-delay: 0.1s; }
+    section:nth-of-type(3) { animation-delay: 0.15s; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 640px) {
+      .hero {
+        grid-template-columns: 1fr;
+        padding: 3rem 0 2.5rem;
+      }
+      .hero-photo {
+        width: 140px;
+        order: -1;
+      }
+      .pos-year { width: 80px; }
+    }
+  </style>
 </head>
-	
 <body>
-	<!-- <a href="https://hits.seeyoufarm.com"><img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fabhilashcsingh.github.io&count_bg=%236CCF50&title_bg=%23555555&icon=&icon_color=%237C5151&title=Visitors&edge_flat=true"/></a> -->
-	<div class="navbar">
-	  <a href="https://abhilashcsingh.github.io/">Home</a>
-	  <a href="https://abhilashcsingh.github.io/research.html">Research</a>
-	  <a href="https://abhilashcsingh.github.io/news.html">News</a>
-	  <a href="https://abhilashcsingh.github.io/blog.html">Blog</a>
-	</div>
-		
-	<div class="section">
-		<table style="width:100%;max-width:1200px; border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-			
-			
-			<tr style="padding:0px">
-			<td style="padding:2.5%;width:63%;vertical-align:middle">
-			
-			<p style="text-align:center">
-				<name>Abhilash Chandra Singh, Ph.D.</name>
-			</p>			
-			<ul>
-			  <li> January 2027 onwards: (incoming) <b>Lecturer in Transport and Energy Systems </b>, School of Architecture, Building and Civil Engineering (ABCE), <b>Loughborough University</b>, England 
-				</li>
-			  <li> August 2024 - December 2026: <b>Co-Principal Investigator (2026-2030) and Research Fellow (2024-2026)</b>, Department of Civil, Structural and Environmental Engineering, <b>Trinity College Dublin</b>, Ireland 
-				</li>
-			  <!-- <li> September 2023-June 2024: Research Associate, School of Allied Health, University of Limerick, Ireland 
-				</li> -->
-			  <li> 2019-2023: <b>Ph.D.</b>, Transport Engineering <a href="https://doi.org/10.25560/123346">(Dissertation)</a>, <b>Imperial College London</b>, advised by <a href="https://www.imperial.ac.uk/people/a.sivakumar">Prof. Aruna Sivakumar</a>.
-				</li>
-			  <!-- <li>2018-2019: Research Assistant, <a href="https://ctr.utexas.edu">Center for Transportation Research</a>, advised by <a href="https://sboyles.github.io/">Prof. Stephen Boyles</a>.
-				</li> -->
-			  <li>2016-2018: <b>M.Sc</b> in Transportation Engineering <a href="https://repositories.lib.utexas.edu/server/api/core/bitstreams/85e60398-92da-4657-9b4b-765a042aa3bd/content">(Dissertation)</a> and Research Assistant at Center for Transportation Research, <b>The University of Texas at Austin</b>, advised by <a href="https://www.caee.utexas.edu/prof/bhat/">Prof. Chandra Bhat</a>
-				</li>
-			  <li>2012-2016: B.Tech,. Civil Engineering, <b>Indian Institute of Technology Bombay</b>, advised by <a href="https://www.civil.iitb.ac.in/~vmtom/">Prof. Tom Mathew</a>
-				</li>
-<!-- 			  <li><i>Research:</i> Choice modelling, Econometric Behavioural modelling, Transportation systems engineering and planning, Machine learning
-				</li> -->
-			</ul>
-			
-			<td style="padding:0px;width:40%;max-width:40%">
-			  <a href="images/AbhilashSingh5.jpg"><img style="width:60%;max-width:60%" alt="profile photo" src="images/AbhilashSingh5.jpg" class="hoverZoomLink"></a>
-			</td>
-				
-			</td>
-			</tr>
-		</tbody></table>
-	</div>
 
-	<div class="section">	   
-		<table style="width:100%;max-width:1100px; border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-		   <tr>
-			<td style="padding:0px;width:100%;vertical-align:middle">
-			  <h2>About</h2>
-			<p>
-				I am a Research Fellow in Transportation Engineering at Trinity College Dublin, Ireland, and serve as Research Staff Representative (2025/26) on the School of Engineering Executive and Research Committees.
-				</p>
-				
-				<p>
-				My research focuses on human behaviour in complex transport and energy systems. I develop integrative frameworks combining econometric modelling, machine learning, causal inference, and energy–transport systems analysis to study activity–travel and energy-related decision-making.
-				</p>
-				
-				<p>
-				I have secured over €1.35 million in competitive research funding. I am Co-Investigator on an EPA Ireland project, <i>Integrated Grid Resilience for Infrastructure Sustainability & Emergencies (2026–2028)</i>, and Co-Principal Investigator on an SEAI RD&D grant, <i>Causal Inference for Resilient Cities and Urban Integrated Transport (2026–2030)</i>.
-				</p>
-				
-				<p>
-				I hold a PhD in Transportation Engineering from Imperial College London (2023), an MSc from the University of Texas at Austin, and a BTech from the Indian Institute of Technology Bombay.
-				</p>
-				
-				<p>
-				I am an Imperial College Global Fellow and Turing Scheme awardee (2022), having conducted research at the Technical University of Munich. I have also held the Dixon Scholarship, Wellcome Trust Scholarship, Texas District Student Fellowship, and a graduate fellowship at UT Austin.
-			</p>
-			<p>
-					A detailed academic bio is available <a href="https://raw.githubusercontent.com/abhilashcsingh/abhilashcsingh.github.io/master/data/bio.txt">here</a>. 
-			</p>
-			</td>
-		  </tr>
-		</tbody></table>
-	</div>
-	
-	<div class="section">	   
-		<table style="width:100%;max-width:1100px; border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-		   <tr>
-			<td style="padding:0px;width:100%;vertical-align:middle">
-			  <h2>Contact and quick links</h2>
-				<p>
-				<li> <a href="mailto:abhilash.singh@tcd.ie">Work Email</a> 
-				</li>
-				<li> <a href="mailto:acsingh@protonmail.com">Personal Email</a> 
-				</li>
-				<li> <a href="https://scholar.google.com/citations?user=2Z9bpv0AAAAJ&hl=en&oi=ao">Google Scholar</a> 
-				</li>
-				<li> <a href="https://bsky.app/profile/acsingh.bsky.social">BlueSky</a> 
-				</li>
-				<li> <a href="https://www.linkedin.com/in/abhilashchandrasingh/">LinkedIn</a> 
-				</li>
-				<li> For access to Curriculum Vitae, kindly email me!
-				</li>
-					<li>
-				  <a href="https://raw.githubusercontent.com/abhilashcsingh/abhilashcsingh.github.io/master/data/bio.txt">Academic Bio</a>
-				</li>
-				</p>
-			</td>
-		  </tr>
-		</tbody></table>
-	</div>
-	
-	<div class="section">	      
-		<table style="width:100%;max-width:1100px; border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-		   <tr>
-			<td style="padding:0px;width:100%;vertical-align:middle">
-			  <h2>References</h2>
-			   <p>  
-			  	<li><a href="https://www.tcd.ie/research/profiles/?profile=caulfib">Brian Caulfield</a> (PI and manager, <i>Trinity College Dublin, Ireland</i>), 
-				<br></li>
-				<li><a href="https://www.imperial.ac.uk/people/a.sivakumar">Aruna Sivakumar</a> (Doctoral advisor, <i>Imperial College London, U.K.</i>), 
-				<br></li>
-				<li><a href="https://civmin.utoronto.ca/home/about-us/directory/professors/eric-miller/">Eric Miller</a> (Collaborator, <i>University of Toronto</i>), 
-				<br></li>
-				<li><a href="https://www.imperial.ac.uk/people/anazelle">Audrey de Nazelle</a> (Collaborator, <i>Center for Environmental Policy, Imperial College London</i>), 
-				<br></li>
-				<!-- <li><a href="https://www.imperial.ac.uk/people/s.faghih-imani">Ahmadreza Faghih Imani</a> (Collaborator, <i>Center for Environmental Policy, Imperial College London</i>), 
-				<br></li> -->
-				<!-- <li><a href="https://sboyles.github.io/">Stephen Boyles</a> (MS Thesis Examiner, <i> UT Austin</i>),
-				<br></li>
-				<li><a href="https://www.civil.iitb.ac.in/~velaga/">Nagendra Velaga</a> (Research Mentor, <i>IIT Bombay</i>),
-				<br></li>
-				<li> <a href="https://www.civil.iitb.ac.in/~ramsankaran/">Raaj Ramsankaran</a> (Undergraduate Faculty Advisor, <i>IIT Bombay</i>)
-				</li> -->
-		
-			<!-- 		<br>  Current collaborators:  &nbsp|&nbsp
-						  <a href="https://www2.dijon.inrae.fr/cesaer/membres/helene-bouscasse/">Dr. Hélène Bouscasse</a> &nbsp|&nbsp
-						  <a href="https://scholar.google.co.jp/citations?hl=ja&user=VE8_qSgAAAAJ&view_op=list_works&sortby=pubdate">Dr. Hajime Watanabe</a> -->
-			<!-- 		      <a href="">Dr. Sebastian Astroza</a>,
-						  <a href="">Dr. Ram Pendyala</a>, -->
-				<!-- 				<b><a href="https://www.imperial.ac.uk/people/fangce.guo">Fangce Guo</a></b> (Project supervisor, <i>Imperial College London</i>) -->
-<!-- 					<b><a href="https://www.professoren.tum.de/en/moeckel-rolf/">Rolf Moeckel</a></b> (<i>TU Munich</i>), -->
-<!-- 				   	 -->
-			  </p> 
-				</td>
-			  </tr>
-			</tbody></table>
-		</div>
+  <nav>
+    <a href="https://abhilashcsingh.github.io/">Home</a>
+    <a href="https://abhilashcsingh.github.io/research.html">Research</a>
+    <a href="https://abhilashcsingh.github.io/news.html">News</a>
+    <a href="https://abhilashcsingh.github.io/blog.html">Blog</a>
+  </nav>
 
-		<!-- <div class="section">	      
-		<table style="width:100%;max-width:1100px; border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-		   <tr>
-			<td style="padding:0px;width:100%;vertical-align:middle">
-			  <h2>Words to live by . . . </h2>
-			   <p>  
-			  	What a misfortune, although you are made <br>
-				for fine and great works <br>
-				this unjust fate of yours always <br>
-				denies you encouragement and success; <br>
-				that base customs should block you; <br>
-				and pettiness and indifference. <br>
-				And how terrible the day when you yield <br>
-				(the day when you give up and yield), <br>
-				and you leave on foot for Susa, <br>
-				and you go to the monarch Artaxerxes <br>
-				who favorably places you in his court, <br>
-				and offers you satrapies and the like. <br>
-				And you accept them with despair <br>
-				these things that you do not want. <br>
-				Your soul seeks other things, weeps for other things; <br>>
-				the praise of the public and the Sophists, <br>
-				the hard-won and inestimable Well Done; <br>
-				the Agora, the Theater, and the Laurels. <br>
-				How can Artaxerxes give you these, <br>
-				where will you find these in a satrapy; <br>
-				and what life can you live without these. <br>
-			  <h4><b>The Satrapy</b>, by Constantine P. Cavafy</h4>
-			  </p> 
-				</td>
-			  </tr>
-			</tbody></table>
-		</div> -->
-		      
-              </p>
-            </td>
-          </tr>
-			</tbody></table>
-      </td>
-    </tr>
-  </table>
-			<div style="text-align:center; margin-top:40px; font-size:0.9em; color:#666;">
-				  This website was last updated on 15/03/2026.
-				</div>
+  <div class="container">
+
+    <!-- HERO -->
+    <div class="hero">
+      <div class="hero-text">
+        <h1>Abhilash Chandra Singh</h1>
+        <p class="hero-title">Ph.D. &nbsp;·&nbsp; Transport &amp; Energy Systems</p>
+
+        <ul class="positions">
+          <li>
+            <span class="pos-year">2027 →</span>
+            <span><strong>Lecturer, Transport &amp; Energy Systems</strong><br>
+            <em>Loughborough University</em>, School of Architecture, Building and Civil Engineering</span>
+          </li>
+          <li>
+            <span class="pos-year">2024 – 2026</span>
+            <span><strong>Co-PI &amp; Research Fellow</strong><br>
+            <em>Trinity College Dublin</em>, Dept. of Civil, Structural &amp; Environmental Engineering</span>
+          </li>
+          <li>
+            <span class="pos-year">2019 – 2023</span>
+            <span><strong>Ph.D., Transport Engineering</strong> &nbsp;<a href="https://doi.org/10.25560/123346" style="color:var(--accent);font-size:12px;">[dissertation]</a><br>
+            <em>Imperial College London</em>, advised by <a href="https://www.imperial.ac.uk/people/a.sivakumar" style="color:var(--accent);">Prof. Aruna Sivakumar</a></span>
+          </li>
+          <li>
+            <span class="pos-year">2016 – 2018</span>
+            <span><strong>M.Sc., Transportation Engineering</strong> &nbsp;<a href="https://repositories.lib.utexas.edu/server/api/core/bitstreams/85e60398-92da-4657-9b4b-765a042aa3bd/content" style="color:var(--accent);font-size:12px;">[dissertation]</a><br>
+            <em>University of Texas at Austin</em>, advised by <a href="https://www.caee.utexas.edu/prof/bhat/" style="color:var(--accent);">Prof. Chandra Bhat</a></span>
+          </li>
+          <li>
+            <span class="pos-year">2012 – 2016</span>
+            <span><strong>B.Tech., Civil Engineering</strong><br>
+            <em>IIT Bombay</em>, advised by <a href="https://www.civil.iitb.ac.in/~vmtom/" style="color:var(--accent);">Prof. Tom Mathew</a></span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="hero-photo">
+        <a href="images/AbhilashSingh5.jpg">
+          <img src="images/AbhilashSingh5.jpg" alt="Portrait of Abhilash Chandra Singh">
+        </a>
+      </div>
+    </div>
+
+    <!-- ABOUT -->
+    <section>
+      <h2><span></span>About</h2>
+      <div class="about-body">
+        <p>
+          I am a Research Fellow in Transportation Engineering at Trinity College Dublin, Ireland,
+          and serve as Research Staff Representative (2025/26) on the School of Engineering
+          Executive and Research Committees.
+        </p>
+        <p>
+          My research focuses on human behaviour in complex transport and energy systems. I develop
+          integrative frameworks combining econometric modelling, machine learning, causal inference,
+          and energy–transport systems analysis to study activity–travel and energy-related
+          decision-making.
+        </p>
+
+        <div class="funding-highlight">
+          <p>
+            I have secured over <strong>€1.35 million</strong> in competitive research funding —
+            as Co-Investigator on an <strong>EPA Ireland</strong> project (<em>Integrated Grid Resilience
+            for Infrastructure Sustainability &amp; Emergencies, 2026–2028</em>) and Co-Principal
+            Investigator on an <strong>SEAI RD&amp;D</strong> grant (<em>Causal Inference for Resilient
+            Cities and Urban Integrated Transport, 2026–2030</em>).
+          </p>
+        </div>
+
+        <p>
+          I am an Imperial College Global Fellow and Turing Scheme awardee (2022), having conducted
+          research at the Technical University of Munich. I have also held the Dixon Scholarship,
+          Wellcome Trust Scholarship, Texas District Student Fellowship, and a graduate fellowship
+          at UT Austin.
+        </p>
+        <p>
+          A detailed academic bio is available <a href="https://raw.githubusercontent.com/abhilashcsingh/abhilashcsingh.github.io/master/data/bio.txt">here</a>.
+        </p>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section>
+      <h2><span></span>Contact &amp; Links</h2>
+      <div class="links-grid">
+
+        <a class="link-item" href="mailto:abhilash.singh@tcd.ie">
+          <svg class="link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 7 10-7"/></svg>
+          Work Email
+        </a>
+
+        <a class="link-item" href="mailto:acsingh@protonmail.com">
+          <svg class="link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 7 10-7"/></svg>
+          Personal Email
+        </a>
+
+        <a class="link-item" href="https://scholar.google.com/citations?user=2Z9bpv0AAAAJ&hl=en&oi=ao" target="_blank">
+          <svg class="link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 14c4.418 0 8-1.79 8-4s-3.582-4-8-4-8 1.79-8 4 3.582 4 8 4z"/><path d="M12 14v6M8 17.5c0 1.5 1.5 2.5 4 2.5s4-1 4-2.5"/><path d="M4 10v4"/></svg>
+          Google Scholar
+        </a>
+
+        <a class="link-item" href="https://bsky.app/profile/acsingh.bsky.social" target="_blank">
+          <svg class="link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3C7 3 3 7 3 12s4 9 9 9 9-4 9-9-4-9-9-9z"/><path d="M8 12s1-3 4-3 4 3 4 3-1 3-4 3-4-3-4-3z"/></svg>
+          BlueSky
+        </a>
+
+        <a class="link-item" href="https://www.linkedin.com/in/abhilashchandrasingh/" target="_blank">
+          <svg class="link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="3"/><path d="M7 10v7M7 7v.01M12 17v-4a2 2 0 0 1 4 0v4M12 10v7"/></svg>
+          LinkedIn
+        </a>
+
+        <a class="link-item" href="https://raw.githubusercontent.com/abhilashcsingh/abhilashcsingh.github.io/master/data/bio.txt" target="_blank">
+          <svg class="link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M9 13h6M9 17h4"/></svg>
+          Academic Bio
+        </a>
+
+        <div class="link-note">
+          CV available on request — please email.
+        </div>
+
+      </div>
+    </section>
+
+    <!-- REFERENCES -->
+    <section>
+      <h2><span></span>References</h2>
+      <ul class="refs-list">
+        <li>
+          <a href="https://www.tcd.ie/research/profiles/?profile=caulfib">Brian Caulfield</a>
+          <div class="ref-role">PI and manager &nbsp;·&nbsp; Trinity College Dublin, Ireland</div>
+        </li>
+        <li>
+          <a href="https://www.imperial.ac.uk/people/a.sivakumar">Aruna Sivakumar</a>
+          <div class="ref-role">Doctoral advisor &nbsp;·&nbsp; Imperial College London, UK</div>
+        </li>
+        <li>
+          <a href="https://civmin.utoronto.ca/home/about-us/directory/professors/eric-miller/">Eric Miller</a>
+          <div class="ref-role">Collaborator &nbsp;·&nbsp; University of Toronto</div>
+        </li>
+        <li>
+          <a href="https://www.imperial.ac.uk/people/anazelle">Audrey de Nazelle</a>
+          <div class="ref-role">Collaborator &nbsp;·&nbsp; Centre for Environmental Policy, Imperial College London</div>
+        </li>
+      </ul>
+    </section>
+
+  </div>
+
+  <footer>
+    <div class="container">
+      Last updated 15 March 2026
+    </div>
+  </footer>
+
 </body>
-
 </html>
