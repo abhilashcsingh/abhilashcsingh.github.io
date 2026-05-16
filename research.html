@@ -2,382 +2,613 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Abhilash Chandra Singh</title>
-  <meta name="author" content="Abhilash Chandra Singh">
+  <meta name="author" content="Abhilash Chandra Singh, Ph.D.">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" type="text/css" href="stylesheet.css">
-</head>	
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+  <title>Research — Abhilash Chandra Singh</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream: #f7f3ee;
+      --ink: #1c1a17;
+      --ink-light: #4a4540;
+      --ink-muted: #7a746c;
+      --accent: #8b5e3c;
+      --rule: #ddd6cc;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--cream);
+      color: var(--ink);
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      font-size: 16px;
+      line-height: 1.75;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      height: 60px;
+      background: var(--cream);
+      border-bottom: 1px solid var(--rule);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 2.5rem;
+    }
+
+    nav a {
+      font-family: 'Jost', sans-serif;
+      font-weight: 400;
+      font-size: 13px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+      text-decoration: none;
+      transition: color 0.2s;
+      position: relative;
+    }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      left: 0; bottom: -3px;
+      width: 0; height: 1px;
+      background: var(--accent);
+      transition: width 0.25s ease;
+    }
+
+    nav a:hover { color: var(--accent); }
+    nav a:hover::after { width: 100%; }
+    nav a.active { color: var(--accent); }
+    nav a.active::after { width: 100%; }
+
+    /* ── LAYOUT ── */
+    .container {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    /* ── PAGE HEADER ── */
+    .page-header {
+      padding: 5rem 0 3rem;
+      border-bottom: 1px solid var(--rule);
+      animation: fadeUp 0.5s ease both;
+    }
+
+    h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 500;
+      font-size: clamp(2.2rem, 5vw, 3.2rem);
+      line-height: 1.15;
+      letter-spacing: -0.01em;
+      color: var(--ink);
+      margin-bottom: 0.5rem;
+    }
+
+    .page-sub {
+      font-size: 13px;
+      font-weight: 400;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.5rem;
+    }
+
+    .research-intro {
+      font-size: 15px;
+      color: var(--ink-light);
+      line-height: 1.75;
+      max-width: 700px;
+    }
+
+    /* ── SECTION HEADING ── */
+    h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 500;
+      font-size: 1.5rem;
+      letter-spacing: -0.01em;
+      color: var(--ink);
+      padding: 2.5rem 0 1rem;
+      border-bottom: 1px solid var(--rule);
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    h2::before {
+      content: '';
+      display: inline-block;
+      width: 20px;
+      height: 1.5px;
+      background: var(--accent);
+      flex-shrink: 0;
+    }
+
+    /* ── PAPER ITEM ── */
+    .paper-item {
+      display: grid;
+      grid-template-columns: 150px 1fr;
+      gap: 0 1.75rem;
+      padding: 1.75rem 0;
+      border-bottom: 1px solid var(--rule);
+      align-items: start;
+      animation: fadeUp 0.5s ease both;
+    }
+
+    .paper-thumb {
+      width: 150px;
+      height: 110px;
+      object-fit: cover;
+      display: block;
+      filter: grayscale(20%);
+      transition: filter 0.3s;
+      border: 1px solid var(--rule);
+    }
+
+    .paper-thumb:hover { filter: grayscale(0%); }
+
+    .paper-content { }
+
+    /* ── STATUS TAGS ── */
+    .tag {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 2px 7px;
+      border-radius: 2px;
+      margin-bottom: 0.5rem;
+    }
+
+    .tag-published  { background: rgba(60,120,80,0.10);  color: #3a7050; }
+    .tag-working    { background: rgba(139,94,60,0.12);  color: var(--accent); }
+    .tag-conference { background: rgba(60,100,139,0.10); color: #3c648b; }
+    .tag-report     { background: rgba(60,60,60,0.08);   color: var(--ink-muted); }
+
+    /* ── PAPER TITLE ── */
+    .paper-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 500;
+      font-size: 1.15rem;
+      line-height: 1.35;
+      color: var(--ink);
+      text-decoration: none;
+      display: block;
+      margin-bottom: 0.35rem;
+      transition: color 0.2s;
+    }
+
+    .paper-title:hover { color: var(--accent); }
+
+    /* ── VENUE ── */
+    .paper-venue {
+      font-size: 12.5px;
+      color: var(--ink-muted);
+      font-style: italic;
+      margin-bottom: 0.55rem;
+      line-height: 1.5;
+    }
+
+    /* ── AUTHORS ── */
+    .paper-authors {
+      font-size: 13.5px;
+      color: var(--ink-light);
+      margin-bottom: 0.7rem;
+      line-height: 1.55;
+    }
+
+    .paper-authors strong { font-weight: 500; color: var(--ink); }
+
+    .paper-authors a {
+      color: var(--ink-light);
+      text-decoration: underline;
+      text-underline-offset: 2px;
+      text-decoration-color: var(--rule);
+      transition: color 0.2s, text-decoration-color 0.2s;
+    }
+
+    .paper-authors a:hover {
+      color: var(--accent);
+      text-decoration-color: var(--accent);
+    }
+
+    /* ── LINKS ── */
+    .paper-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+
+    .paper-link {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 3px 9px;
+      border: 1px solid var(--rule);
+      color: var(--ink-muted);
+      text-decoration: none;
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    .paper-link:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .paper-link-note {
+      font-size: 11px;
+      letter-spacing: 0.04em;
+      color: var(--ink-muted);
+      padding: 3px 0;
+      font-style: italic;
+      align-self: center;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 2.5rem 0;
+      text-align: center;
+      font-size: 12px;
+      letter-spacing: 0.06em;
+      color: var(--ink-muted);
+      border-top: 1px solid var(--rule);
+      margin-top: 2rem;
+    }
+
+    /* ── ANIMATE ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .paper-item:nth-child(2)  { animation-delay: 0.04s; }
+    .paper-item:nth-child(3)  { animation-delay: 0.08s; }
+    .paper-item:nth-child(4)  { animation-delay: 0.12s; }
+    .paper-item:nth-child(5)  { animation-delay: 0.16s; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 580px) {
+      .paper-item { grid-template-columns: 1fr; }
+      .paper-thumb { width: 100%; height: 160px; }
+    }
+  </style>
+</head>
 <body>
-  <div class="navbar">
+
+  <nav>
     <a href="https://abhilashcsingh.github.io/">Home</a>
-    <a href="https://abhilashcsingh.github.io/research.html">Research</a>
+    <a href="https://abhilashcsingh.github.io/research.html" class="active">Research</a>
     <a href="https://abhilashcsingh.github.io/news.html">News</a>
     <a href="https://abhilashcsingh.github.io/blog.html">Blog</a>
+  </nav>
+
+  <div class="container">
+
+    <div class="page-header">
+      <h1>Research</h1>
+      <p class="page-sub">Publications &amp; working papers</p>
+      <p class="research-intro">
+        My research focuses on residential location modelling, accessibility measurement, discrete choice
+        modelling, and the endogenous relationship between land use and travel behaviour. A central theme
+        is inferring the bi-directional link between where people live and how they travel — drawing on
+        econometric methods, causal inference, and machine learning to understand human activity patterns
+        and decision-making in complex transport and energy systems.
+      </p>
+    </div>
+
+
+    <!-- ══ PUBLISHED ══ -->
+    <h2>Journal articles</h2>
+
+    <div class="paper-item">
+      <img class="paper-thumb" src="images/VMT.jpg" alt="Household VMT paper">
+      <div class="paper-content">
+        <span class="tag tag-published">Published</span>
+        <a class="paper-title" href="https://www.sciencedirect.com/science/article/abs/pii/S1361920917307551">
+          Quantifying the Relative Contribution of Factors to Household Vehicle Miles of Travel
+        </a>
+        <div class="paper-venue">
+          <em>Transportation Research Part D</em>, Vol. 63, pp. 23–36 &nbsp;·&nbsp;
+          TRB Annual Meeting, Washington DC, January 2018
+        </div>
+        <div class="paper-authors">
+          <strong>Abhilash C. Singh</strong>,
+          <a href="https://fi.udec.cl/academicos/sebastian-astroza-t/">Sebastian Astroza</a>,
+          <a href="https://www.nrel.gov/research/staff/venu-garikapati.html">Venu Garikapati</a>,
+          <a href="https://search.asu.edu/profile/980477">Ram Pendyala</a>,
+          <a href="https://www.caee.utexas.edu/prof/bhat/home.html">Chandra Bhat</a>,
+          <a href="https://ce.gatech.edu/directory/person/patricia-l-mokhtarian">Patricia Mokhtarian</a>
+        </div>
+        <div class="paper-links">
+          <a class="paper-link" href="https://www.sciencedirect.com/science/article/abs/pii/S1361920917307551">DOI</a>
+          <a class="paper-link" href="data/Paper_2018_VMT.pdf">PDF</a>
+          <a class="paper-link" href="data/Paper_2018_VMT_OnlineSupplement.pdf">Supplement</a>
+          <a class="paper-link" href="https://github.com/abhilashcsingh/Paper_2018_VMT">Code</a>
+          <a class="paper-link" href="data/Slides_Abhilashetal_ContributionofFactorstoHouseholdVMT.pdf">Slides</a>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- ══ WORKING PAPERS ══ -->
+    <h2>Working papers</h2>
+
+    <div class="paper-item">
+      <img class="paper-thumb" src="images/IV_bayesian.png" alt="IV probit model">
+      <div class="paper-content">
+        <span class="tag tag-working">Working Paper</span>
+        <a class="paper-title" href="">
+          A probit instrumental variable model for addressing endogeneity in multinomial choice
+          and its consideration set formation
+        </a>
+        <div class="paper-venue">
+          World Conference on Transport Research (WCTR), Montreal, Canada, July 2023
+        </div>
+        <div class="paper-authors">
+          <a href="https://scholar.google.co.jp/citations?hl=ja&user=VE8_qSgAAAAJ&view_op=list_works&sortby=pubdate">Hajime Watanabe</a>,
+          <strong>Abhilash C. Singh</strong>
+        </div>
+      </div>
+    </div>
+
+    <div class="paper-item">
+      <img class="paper-thumb" src="images/accessibilityLondon.jpg" alt="Accessibility London">
+      <div class="paper-content">
+        <span class="tag tag-working">Working Paper</span>
+        <a class="paper-title" href="">
+          Incorporating the impacts of air pollutants and exposure to crime
+          into accessibility-based planning
+        </a>
+        <div class="paper-authors">
+          <strong>Abhilash C. Singh</strong>,
+          <a href="https://www.imperial.ac.uk/people/fangce.guo">Fangce Guo</a>,
+          <a href="https://www.imperial.ac.uk/people/a.sivakumar">Aruna Sivakumar</a>,
+          Adam Gough
+        </div>
+      </div>
+    </div>
+
+    <div class="paper-item">
+      <img class="paper-thumb" src="images/toronto.jpg" alt="Toronto accessibility">
+      <div class="paper-content">
+        <span class="tag tag-working">Working Paper</span>
+        <a class="paper-title" href="">
+          A joint analysis of accessibility and household trip frequencies by travel mode
+        </a>
+        <div class="paper-venue">
+          World Conference on Transport Research (WCTR), Montreal, Canada, July 2023
+        </div>
+        <div class="paper-authors">
+          <strong>Abhilash C. Singh</strong>,
+          <a href="https://www.imperial.ac.uk/people/s.faghih-imani">Ahmadreza Faghih Imani</a>,
+          <a href="https://www.imperial.ac.uk/people/a.sivakumar">Aruna Sivakumar</a>,
+          Yang (Luna) Xi,
+          <a href="https://civmin.utoronto.ca/home/about-us/directory/professors/eric-miller/">Eric Miller</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="paper-item">
+      <img class="paper-thumb" src="images/accessibility.jpg" alt="Accessibility big data">
+      <div class="paper-content">
+        <span class="tag tag-working">Working Paper</span>
+        <a class="paper-title" href="">
+          Accessibility in the era of big data and emerging technologies
+        </a>
+        <div class="paper-authors">
+          <strong>Abhilash C. Singh</strong>,
+          <a href="https://www.imperial.ac.uk/people/a.sivakumar">Aruna Sivakumar</a>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- ══ CONFERENCE ══ -->
+    <h2>Conference papers</h2>
+
+    <div class="paper-item">
+      <img class="paper-thumb" src="images/icmc.gif" alt="ICMC 2022">
+      <div class="paper-content">
+        <span class="tag tag-conference">Conference</span>
+        <a class="paper-title" href="data/Slides_2022_icmc.pdf">
+          Semi-compensatory probabilistic model for residential location choices
+        </a>
+        <div class="paper-venue">
+          7th International Choice Modelling Conference (ICMC), Reykjavik, Iceland, May 2022
+        </div>
+        <div class="paper-authors">
+          <strong>Abhilash C. Singh</strong>,
+          <a href="https://www.imperial.ac.uk/people/a.sivakumar">Aruna Sivakumar</a>,
+          <a href="https://www.professoren.tum.de/en/moeckel-rolf/">Rolf Moeckel</a>
+        </div>
+        <div class="paper-links">
+          <a class="paper-link" href="data/Slides_2022_icmc.pdf">Slides</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="paper-item">
+      <img class="paper-thumb" src="images/AVPSYCH.jpg" alt="Automated vehicles psychology">
+      <div class="paper-content">
+        <span class="tag tag-conference">Conference</span>
+        <a class="paper-title" href="data/Paper_2020_avpsych.PDF">
+          Psychosocial factors associated with intended use of automated vehicles
+        </a>
+        <div class="paper-venue">
+          9th Symposium of the European Association for Research in Transportation (hEART),
+          Lyon, France, February 2021
+        </div>
+        <div class="paper-authors">
+          <strong>Abhilash C. Singh</strong>,
+          <a href="https://www2.dijon.inrae.fr/cesaer/membres/helene-bouscasse/">Hélène Bouscasse</a>,
+          <a href="https://www.imperial.ac.uk/people/a.sivakumar">Aruna Sivakumar</a>
+        </div>
+        <div class="paper-links">
+          <a class="paper-link" href="data/Paper_2020_avpsych.PDF">PDF</a>
+          <a class="paper-link" href="https://github.com/abhilashcsingh/Paper_2020_AVPSYCH">Code</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="paper-item">
+      <img class="paper-thumb" src="images/NHTS.jpg" alt="Food desert simulation">
+      <div class="paper-content">
+        <span class="tag tag-conference">Conference</span>
+        <a class="paper-title" href="data/Paper_2019_NHTS.pdf">
+          Predictive food desert simulation modelling to increase food access in underserved communities
+        </a>
+        <div class="paper-venue">
+          98th Annual Meeting of the Transportation Research Board, Washington DC, January 2019
+          &nbsp;·&nbsp; not peer reviewed
+        </div>
+        <div class="paper-authors">
+          <strong>Abhilash C. Singh</strong>,
+          Kelsey Abel,
+          <a href="https://www.linkedin.com/in/joe-hutchinson-pe-b61525a5">Joseph Hutchinson</a>,
+          Kasey M. Faust,
+          <a href="https://www.caee.utexas.edu/prof/bhat/home.html">Chandra Bhat</a>
+        </div>
+        <div class="paper-links">
+          <a class="paper-link" href="data/Paper_2019_NHTS.pdf">PDF</a>
+          <a class="paper-link" href="https://github.com/abhilashcsingh/Paper_2019_NHTS">Code</a>
+          <a class="paper-link" href="data/Slides_2019_NHTS.pdf">Slides</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="paper-item">
+      <img class="paper-thumb" src="images/IATBR.jpg" alt="IATBR 2018">
+      <div class="paper-content">
+        <span class="tag tag-conference">Conference</span>
+        <a class="paper-title" href="data/Paper_2018_IATBR.pdf">
+          Evaluating the effects of consumers' perceptions of safety and productive use of time
+          on the intention to adopt autonomous vehicle technology
+        </a>
+        <div class="paper-venue">
+          15th International Conference on Travel Behaviour Research (IATBR),
+          Santa Barbara, CA, July 2018 &nbsp;·&nbsp; not peer reviewed
+        </div>
+        <div class="paper-authors">
+          <strong>Abhilash C. Singh</strong>,
+          Patricia Lavieri,
+          Taehooie Kim,
+          <a href="https://www.caee.utexas.edu/prof/bhat/home.html">Chandra Bhat</a>,
+          <a href="https://search.asu.edu/profile/980477">Ram Pendyala</a>
+        </div>
+        <div class="paper-links">
+          <a class="paper-link" href="data/Paper_2018_IATBR.pdf">PDF</a>
+          <a class="paper-link" href="data/Slides_2018_IATBR.pdf">Slides</a>
+          <span class="paper-link-note">Code available on request</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="paper-item">
+      <img class="paper-thumb" src="images/simultaneous_choices.png" alt="Simultaneous choices">
+      <div class="paper-content">
+        <span class="tag tag-conference">Conference</span>
+        <a class="paper-title" href="data/Paper_2018_simultaneous_choices.pdf">
+          Chicken or the egg? Modelling simultaneous transportation choices
+        </a>
+        <div class="paper-venue">
+          Rencontres Francophones Transport-Mobilité (RFTM), Lyon, June 2018
+          &nbsp;·&nbsp; not peer reviewed
+        </div>
+        <div class="paper-authors">
+          <a href="https://www2.dijon.inrae.fr/cesaer/membres/helene-bouscasse/">Hélène Bouscasse</a>,
+          <strong>Abhilash C. Singh</strong>,
+          <a href="https://fi.udec.cl/academicos/sebastian-astroza-t/">Sebastian Astroza</a>,
+          <a href="https://www.caee.utexas.edu/prof/bhat/home.html">Chandra Bhat</a>
+        </div>
+        <div class="paper-links">
+          <a class="paper-link" href="data/Paper_2018_simultaneous_choices.pdf">PDF</a>
+          <a class="paper-link" href="https://github.com/abhilashcsingh/Paper_2018_simultaneous_choices">Code</a>
+          <a class="paper-link" href="data/Slides_2018_simultaneous_choices.pdf">Slides</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="paper-item">
+      <img class="paper-thumb" src="images/NYMTC.png" alt="New York activity-based model">
+      <div class="paper-content">
+        <span class="tag tag-conference">Conference</span>
+        <a class="paper-title" href="https://onlinepubs.trb.org/onlinepubs/Conferences/2018/ITM/RCopperman2.pdf">
+          Adapting an existing activity-based modelling structure for the New York region
+        </a>
+        <div class="paper-venue">
+          TRB Innovations in Travel Modeling Conference, June 2018
+        </div>
+        <div class="paper-authors">
+          <a href="https://camsys.com/blog/people/rachel-copperman">Rachel Copperman</a>,
+          <a href="https://camsys.com/blog/people/jason-lemp">Jason Lemp</a>,
+          <a href="https://camsys.com/about-cs/who-we-are#thomas-rossi">Thomas Rossi</a>,
+          <strong>Abhilash C. Singh</strong>,
+          <a href="https://www.caee.utexas.edu/prof/bhat/home.html">Chandra Bhat</a>,
+          <a href="https://search.asu.edu/profile/980477">Ram Pendyala</a>,
+          <a href="https://www.linkedin.com/in/sara-khoeini">Sara Khoeini</a>,
+          <a href="https://fi.udec.cl/academicos/sebastian-astroza-t/">Sebastian Astroza</a>
+        </div>
+        <div class="paper-links">
+          <a class="paper-link" href="data/Paper_2018_NYMTC.pdf">PDF</a>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- ══ REPORTS ══ -->
+    <h2>Technical reports</h2>
+
+    <div class="paper-item">
+      <img class="paper-thumb" src="images/TXDOT.png" alt="TxDOT statewide model">
+      <div class="paper-content">
+        <span class="tag tag-report">Report</span>
+        <a class="paper-title" href="https://ctr-librarysrv5.austin.utexas.edu/Presto/content/Detail.aspx?ctID=UHVibGljYXRpb25fMTE2MTA%3D&rID=Mjk2OTY%3D&ssid=c2NyZWVuSURfMjEzMjI%3D&bmdc=MQ==">
+          Methods for improving consistency between statewide and regional planning models
+        </a>
+        <div class="paper-authors">
+          <a href="https://sboyles.github.io/">Stephen Boyles</a>,
+          <a href="https://www.caee.utexas.edu/prof/bhat/home.html">Chandra Bhat</a>,
+          <a href="https://www.linkedin.com/in/jduthie">Jennifer Duthie</a>,
+          <a href="https://www.linkedin.com/in/nan-jiang-12134826">Nan Jiang</a>,
+          <a href="https://www.linkedin.com/in/felipe-dias-b9a35946">Felipe Dias</a>,
+          <a href="https://www.linkedin.com/in/ehsan-jafari">Ehsan Jafari</a>,
+          <a href="https://venktesh22.github.io/index.html">Venktesh Pandey</a>,
+          <strong>Abhilash C. Singh</strong>,
+          <a href="https://cnyahia.github.io/">Cesar Yahia</a>
+        </div>
+        <div class="paper-links">
+          <a class="paper-link" href="data/Paper_2017_TXDOT.pdf">PDF</a>
+        </div>
+      </div>
+    </div>
+
   </div>
-	
-  <table style="width:100%;max-width:1100px;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
-    <tbody>
-      <tr>
-        <td>
-            <h1>Research</h1>
-            <p>
-              I'm interested in residential location modelling, accessibility measurement frameworks, choice modelling, endogeneity and travel behaviour. 
-              Much of my research is about inferring relationship between residential location and travel behaviour (bi-directionality and endogeneity) 
-              from travel data and understanding human daily-activity pattern.
-              My future research goals include expanding my work to incorporate broader human decision making, bringing together machine learning and 
-              econometric methods and causality in choice models.
-            </p>
 
+  <footer>
+    <div class="container">
+      Last updated <span id="last-updated"></span>
+    </div>
+  </footer>
 
-		    
-		<p style="text-align:center">
-				<table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-					<tr>
-					    <td style="padding:20px;width:25%;vertical-align:middle">
-					      <img src="images/IV_bayesian.png" alt="safs_small" width="180" height="140" style="border-style: none">
-					    </td>
-					    <td style="padding:20px;width:75%;vertical-align:middle">
-					      <a href="">
-						<papertitle> A probit instrumental variable model for addressing endogeneity in multinomial choice and its consideration set formation (*working paper*)</papertitle>
-					      </a>
-						    <br>
-						    [accepted for presentation at World Conference on Transportation Research (WCTR), Montreal, Canada, July 2023.]
-					    <p>
-					      <a href="https://scholar.google.co.jp/citations?hl=ja&user=VE8_qSgAAAAJ&view_op=list_works&sortby=pubdate">Hajime Watanabe</a>,
-					      <strong>Abhilash C. Singh</strong>
-					      </p>
-					   </td>
-					  </tr>
-		</p>
-		    
-		    
-		    
+  <script>
+    document.getElementById('last-updated').textContent =
+      new Date(document.lastModified).toLocaleDateString('en-GB', {
+        day: 'numeric', month: 'long', year: 'numeric'
+      });
+  </script>
 
-		<p style="text-align:center">
-				<table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-					<tr>
-					    <td style="padding:20px;width:25%;vertical-align:middle">
-					      <img src="images/accessibilityLondon.jpg" alt="safs_small" width="180" height="140" style="border-style: none">
-					    </td>
-					    <td style="padding:20px;width:75%;vertical-align:middle">
-					      <a href="">
-						<papertitle> Incorporating the impacts of air pollutants and exposure to crime into accessibility-based planning (*working paper*)</papertitle>
-					      </a>
-					    <p>
-				 	      <strong>Abhilash C. Singh</strong>,
-					      <a href="https://www.imperial.ac.uk/people/fangce.guo">Fangce Guo</a>,
-					      <a href="https://www.imperial.ac.uk/people/a.sivakumar">Aruna Sivakumar</a>,
-					      Adam Gough
-					    </p>
-					   </td>
-					  </tr>
-		</p> 
-		     
-		    
-		    
-		    
-		<p style="text-align:center">
-				<table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-					<tr>
-					    <td style="padding:20px;width:25%;vertical-align:middle">
-					      <img src="images/toronto.jpg" alt="safs_small" width="180" height="140" style="border-style: none">
-					    </td>
-					    <td style="padding:20px;width:75%;vertical-align:middle">
-					      <a href="">
-						<papertitle> A joint analysis of accessibility and household trip frequencies by travel mode (*working paper*)</papertitle>
-					      </a>
-						    <br>
-						    [accepted for presentation at World Conference on Transportation Research (WCTR), Montreal, Canada, July 2023.]
-					     
-					    <p>
-					      <strong>Abhilash C. Singh</strong>,
-					      <a href="https://www.imperial.ac.uk/people/s.faghih-imani">Ahmadreza Faghih Imani</a>,
-					      <a href="https://www.imperial.ac.uk/people/a.sivakumar">Aruna Sivakumar</a>,
-					      Yang (Luna) Xi,
-					      <a href="https://civmin.utoronto.ca/home/about-us/directory/professors/eric-miller/">Eric Miller</a>
-					    </p>
-					   </td>
-					  </tr>
-		</p>
-		    
-		    
-		    
-		    
-		<p style="text-align:center">
-				<table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-					<tr>
-					    <td style="padding:20px;width:25%;vertical-align:middle">
-					      <img src="images/accessibility.jpg" alt="safs_small" width="180" height="140" style="border-style: none">
-					    </td>
-					    <td style="padding:20px;width:75%;vertical-align:middle">
-					      <a href="">
-						<papertitle> Accessibility in the Era of Big Data and Emerging Technologies (*working paper*)</papertitle>
-					      </a>
-					    <p>
-					      <strong>Abhilash C. Singh</strong>,
-					      <a href="https://www.imperial.ac.uk/people/a.sivakumar">Aruna Sivakumar</a>
-					    </p>
-					   </td>
-					  </tr>
-		</p>
-		    
-		    
-
-		<p style="text-align:center">
-				<table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-					<tr>
-					    <td style="padding:20px;width:25%;vertical-align:middle">
-					      <img src="images/icmc.gif" alt="safs_small" width="180" height="140" style="border-style: none">
-					    </td>
-					    <td style="padding:20px;width:75%;vertical-align:middle">
-					      <a href="data/Slides_2022_icmc.pdf">
-						<papertitle> Semi-compensatory probabilistic model for residential location choices (*working paper*)</papertitle>
-					      </a>
-						    <br>
-						    [presented at 7th International Choice Modeling (ICMC), Reykjavik, Iceland, May 2022.]
-					     <p>
-					      <strong>Abhilash C. Singh</strong>,
-					      <a href="https://www.imperial.ac.uk/people/a.sivakumar">Aruna Sivakumar</a>,
-					      <a href="https://www.professoren.tum.de/en/moeckel-rolf/">Rolf Moeckel</a>
-					    </p>
-					    <p>
-		             		      <a href="data/Slides_2022_icmc.pdf">Slides</a>
-					      </p>
-					   </td>
-					  </tr>
-		</p>
-
-
-
-
-		<p style="text-align:center">
-				<table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-					<tr>
-					    <td style="padding:20px;width:25%;vertical-align:middle">
-					      <img src="images/AVPSYCH.jpg" alt="safs_small" width="180" height="140" style="border-style: none">
-					    </td>
-					    <td style="padding:20px;width:75%;vertical-align:middle">
-					      <a href="data/Paper_2020_avpsych.PDF">
-						<papertitle> Psychosocial factors associated with intended use of automated vehicles </papertitle>
-					      </a>
-						    <br>
-						    [presented at 9th Symposium of the European Association for Research in Transportation (hEART), Lyon, France, February 2021.]
-					     <p>
-					      <strong>Abhilash C. Singh</strong>,
-					      <a href="https://www2.dijon.inrae.fr/cesaer/membres/helene-bouscasse/">Hélène Bouscasse</a>,
-					      <a href="https://www.imperial.ac.uk/people/a.sivakumar">Aruna Sivakumar</a>
-					    </p>
-					    <p>
-		             		      <a href="data/Paper_2020_avpsych.PDF">PDF</a>
-					      /
-					      <a href="https://github.com/abhilashcsingh/Paper_2020_AVPSYCH">Code</a>
-					   </p>
-					   </td>
-					  </tr>
-		</p>
-
-
-		    
-		<p style="text-align:center">
-				<table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-					<tr>
-					    <td style="padding:20px;width:25%;vertical-align:middle">
-					      <img src="images/NHTS.jpg" alt="safs_small" width="180" height="140" style="border-style: none">
-					    </td>
-					    <td style="padding:20px;width:75%;vertical-align:middle">
-					      <a href="data/Paper_2019_NHTS.pdf">
-						<papertitle>Predictive Food Desert Simulation Modelling to increase Food Access in Underserved Communities (not peer reviewed)</papertitle>
-					      </a>
-						    <br>
-						    [presented at Session on Highlights from the 2017 NHTS Data Workshop, 
-						    98th Annual Meeting of the Transportation Research Board, Washington, DC, January 2019.]
-					     <p>
-					      <strong>Abhilash C. Singh</strong>,
-					      Kelsey Abel,
-					      <a href="https://www.linkedin.com/in/joe-hutchinson-pe-b61525a5?trk=public_profile_browsemap">Joseph Hutchinson</a>,
-					      Kasey M. Faust,
-					      <a href="https://www.caee.utexas.edu/prof/bhat/home.html">Chandra Bhat</a>
-					    </p>
-					    <p>
-		             		      <a href="data/Paper_2019_NHTS.pdf">PDF</a>
-					      /
-					      <a href="https://github.com/abhilashcsingh/Paper_2019_NHTS">Code</a>
-					      /
-					      <a href="data/Slides_2019_NHTS.pdf">Slides</a>
-					   </p>
-					   </td>
-					  </tr>
-		</p>
-
-
-
-		    
-		<p style="text-align:center">
-				<table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-					<tr>
-					    <td style="padding:20px;width:25%;vertical-align:middle">
-					      <img src="images/IATBR.jpg" alt="safs_small" width="180" height="140" style="border-style: none">
-					    </td>
-					    <td style="padding:20px;width:75%;vertical-align:middle">
-					      <a href="data/Paper_2018_IATBR.pdf">
-						<papertitle>Evaluating the effects of consumer’s perceptions of safety and productive use of time on the intention 
-							to adopt autonomous vehicle technology (not peer reviewed)</papertitle>
-					      </a>
-						    <br>
-						    [presented at 15th International Conference on Travel Behaviour Research, Santa Barbara, California, July 2018.]
-					     <p>
-					      <strong>Abhilash C. Singh</strong>,
-					      Patricia Lavieri,
-					      Taehooie Kim,
-					      <a href="https://www.caee.utexas.edu/prof/bhat/home.html">Chandra Bhat</a>,
-					      <a href="https://search.asu.edu/profile/980477">Ram Pendyala</a>
-					    </p>
-					    <p>
-		             		      <a href="data/Paper_2018_IATBR.pdf">PDF</a>
-					      /
-					      <a href="data/Slides_2018_IATBR.pdf">Slides</a>
-					      /
-					      [Codes available upon request]
-					      </p>
-					   </td>
-					  </tr>
-		</p>
-		    
-		    
-		    
-		<p style="text-align:center">
-				<table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-					<tr>
-					    <td style="padding:20px;width:25%;vertical-align:middle">
-					      <img src="images/simultaneous_choices.png" alt="safs_small" width="180" height="140" style="border-style: none">
-					    </td>
-					    <td style="padding:20px;width:75%;vertical-align:middle">
-					      <a href="data/Paper_2018_simultaneous_choices.pdf">
-						<papertitle>Chicken or the egg? Modeling simultaneous transportation choices (not peer reviewed)</papertitle>
-					      </a>
-						    <br>
-						    [presented at Rencontres Francophones Transport-Mobilit´e (RFTM), Lyon, June 2018.]
-					     <p>
-					      <a href="https://www2.dijon.inrae.fr/cesaer/membres/helene-bouscasse/">Hélène Bouscasse</a>,
-					      <strong>Abhilash C. Singh</strong>,
-					      <a href="https://fi.udec.cl/academicos/sebastian-astroza-t/">Sebastian Astroza</a>,
-					      <a href="https://www.caee.utexas.edu/prof/bhat/home.html">Chandra Bhat</a>
-					    </p>
-					    <p>
-		             		      <a href="data/Paper_2018_simultaneous_choices.pdf">PDF</a>
-					      /
-					      <a href="https://github.com/abhilashcsingh/Paper_2018_simultaneous_choices">Code</a>
-					      /
-					      <a href="data/Slides_2018_simultaneous_choices.pdf">Slides</a>
-					   </p>
-					   </td>
-					  </tr>
-		</p>
-
-
-
-		<p style="text-align:center">
-				<table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-					<tr>
-					    <td style="padding:20px;width:25%;vertical-align:middle">
-					      <img src="images/NYMTC.png" alt="safs_small" width="180" height="140" style="border-style: none">
-					    </td>
-					    <td style="padding:20px;width:75%;vertical-align:middle">
-					      <a href="https://onlinepubs.trb.org/onlinepubs/Conferences/2018/ITM/RCopperman2.pdf">
-						<papertitle>Adapting an Existing Activity Based Modeling Structure for the New York Region</papertitle>
-					      </a>
-						    <br>
-						    [presented at 2018 TRB Innovations in Travel Modeling Conference, June 2018.]
-					     <p>
-					      <a href="https://camsys.com/blog/people/rachel-copperman">Rachel Copperman</a>,
-					      <a href="https://camsys.com/blog/people/jason-lemp">Jason Lemp</a>,
-					      <a href="https://camsys.com/about-cs/who-we-are#thomas-rossi">Thomas Rossi</a>,
-					      <strong>Abhilash C. Singh</strong>,
-					      <a href="https://www.caee.utexas.edu/prof/bhat/home.html">Chandra Bhat</a>,
-					      <a href="https://search.asu.edu/profile/980477">Ram Pendyala</a>,
-					      <a href="https://www.linkedin.com/in/sara-khoeini">Sara Khoeini</a>,
-					      <a href="https://fi.udec.cl/academicos/sebastian-astroza-t/">Sebastian Astroza</a>
-					      </p>
-					    <p>
-		             		      <a href="data/Paper_2018_NYMTC.pdf">PDF</a>
-					      </p>
-					   </td>
-					  </tr>
-		</p>
-
-		    
-		    
-		<p style="text-align:center">
-				<table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-					<tr>
-					    <td style="padding:20px;width:25%;vertical-align:middle">
-					      <img src="images/VMT.jpg" alt="safs_small" width="180" height="140" style="border-style: none">
-					    </td>
-					    <td style="padding:20px;width:75%;vertical-align:middle">
-					      <a href="https://www.sciencedirect.com/science/article/abs/pii/S1361920917307551">
-						<papertitle>Quantifying the Relative Contribution of Factors to Household Vehicle Miles of Travel</papertitle>
-					      </a>
-						    <br>
-						     Transportation Research Part D, Vol. 63, pp. 23-36. 
-						    <br>
-						    [presented at 97th Annual Meeting of the Transportation Research Board, Washington, DC, January 2018.]
-					     <p>
-					      <strong>Abhilash C. Singh</strong>,
-					      <a href="https://fi.udec.cl/academicos/sebastian-astroza-t/">Sebastian Astroza</a>,
-					      <a href="https://www.nrel.gov/research/staff/venu-garikapati.html">Venu Garikapati</a>,
-					      <a href="https://search.asu.edu/profile/980477">Ram Pendyala</a>,
-					      <a href="https://www.caee.utexas.edu/prof/bhat/home.html">Chandra Bhat</a>,
-					      <a href="https://ce.gatech.edu/directory/person/patricia-l-mokhtarian">Patricia Mokhtarian</a>
-					    </p>
-					    <p>
-		             		      <a href="https://www.sciencedirect.com/science/article/abs/pii/S1361920917307551">DOI</a>
-					      /
-					      <a href="data/Paper_2018_VMT.pdf">PDF</a>
-					      /
-					      <a href="data/Paper_2018_VMT_OnlineSupplement.pdf">Online Supplement</a>
-					      /
-					      <a href="https://github.com/abhilashcsingh/Paper_2018_VMT">Code</a>
-					      /
-					      <a href="data/Slides_Abhilashetal_ContributionofFactorstoHouseholdVMT.pdf">Slides</a>
-					   </p>
-					   </td>
-					  </tr>
-		</p>
-		  
-		    
-		    
-		<p style="text-align:center">
-				<table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-					<tr>
-					    <td style="padding:20px;width:25%;vertical-align:middle">
-					      <img src="images/TXDOT.png" alt="safs_small" width="180" height="140" style="border-style: none">
-					    </td>
-					    <td style="padding:20px;width:75%;vertical-align:middle">
-					      <a href="https://ctr-librarysrv5.austin.utexas.edu/Presto/content/Detail.aspx?ctID=UHVibGljYXRpb25fMTE2MTA%3D&rID=Mjk2OTY%3D&ssid=c2NyZWVuSURfMjEzMjI%3D&bmdc=MQ==">
-						<papertitle>Methods for Improving Consistency between Statewide and Regional Planning Models</papertitle>
-					      </a>
-					     <p>
-					      <a href="https://sboyles.github.io/">Stephen Boyles</a>,
-					      <a href="https://www.caee.utexas.edu/prof/bhat/home.html">Chandra Bhat</a>,
-					      <a href="https://www.linkedin.com/in/jduthie">Jennifer Duthie</a>,
-					      <a href="https://www.linkedin.com/in/nan-jiang-12134826">Nan Jiang</a>,
-					      <a href="https://www.linkedin.com/in/felipe-dias-b9a35946">Felipe Dias</a>,
-					      <a href="https://www.linkedin.com/in/ehsan-jafari">Ehsan Jafari</a>,
-					      <a href="https://venktesh22.github.io/index.html">Venktesh Pandey</a>,
-					      <strong>Abhilash C. Singh</strong>,
-					      <a href="https://cnyahia.github.io/">Cesar Yahia</a>
-					    </p>
-					    <p>
-		             		      <a href="data/Paper_2017_TXDOT.pdf">PDF</a>
-					      </p>
-					   </td>
-					  </tr>
-		</p>
-		    
- </td>
-        </tr>
-      </tbody>
-    </table>
-    
-  </body>
+</body>
 </html>
